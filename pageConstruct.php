@@ -48,6 +48,6 @@ $template = "
 }
 
 $newPage = new pageCreator();
-
+$newPage->create($title, $desc, $price, $template);
 
 ?>
