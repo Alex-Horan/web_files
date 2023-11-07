@@ -4,48 +4,50 @@
             $this->open("./shop_items.sqlite");
         }
     }
+$db = new MyDB();
+$rdb = $db->query("SELECT * FROM listings");
+    while ($results = $rdb->fetchArray(SQLITE3_ASSOC)) {
+        $title = $results['name'];
+        $desc = $results['descript'];
+        $price = $results['price'];
+    }
 
+$template = "
+    <!DOCTYPE html>
+    <html lang='en'>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <title>Document</title>
+    </head>
+    <body>
+        <div class='listings'>
+            <h1>$title</h1>
+            <br><br>
+            <p>$desc</p>
+            <br><br>
+            <h3>$price</h3>
+        </div>
+    
+    
+    </body>
+    </html>
+";
 
 //testing
     class pageCreator {
-        public function __construct(string $title, string $desc, float $price) {
-            $this->title = $title;
-            $this->desc = $desc;
-            $this->price = $price;
-            $this->create($title, $desc, $price);
-        }
 
-        public function create(string $title, string $desc, float $price) {
+        public function create(string $title, string $desc, float $price, string $template) {
             if(!mkdir("./$title")) {
                 die("Failed to make folder");
             }
             
             $fw = fopen("./$title/$title","c");
-            fwrite($fw,"$title $desc $price");
+            fwrite($fw,"$template");
     }
 }
 
-$template = "
-<!DOCTYPE html>
-<html lang='en'>
-<head>
-    <meta charset='UTF-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Document</title>
-</head>
-<body>
-    <div class='listings'>
-        <h1>$title</h1>
-        <br><br>
-        <p>$desc</p>
-        <br><br>
-        <h3>$price</h3>
-    </div>
+$newPage = new pageCreator();
 
-
-</body>
-</html>
-
-";
 
 ?>
