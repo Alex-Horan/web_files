@@ -62,12 +62,20 @@ if (isset($_POST['submit'])) {
     </form>
     
     <script>
-        const tempNum;
         $(document).ready(function() {
             $(".price").on("change", function() {
-                tempNum = (this.value).split
-                this.value = parseFloat(this.value).toFixed(2);
 
+                this.value = parseFloat(this.value).toFixed(2);
+                let part2 = (this.value).split(".")[1].toString();
+
+                let part1 = (this.value.split('.')[0]).toString();
+                if (part1.length > 4) {
+                    part1 = part1.substring(0, part1.length-1);
+                    
+                }
+                if ((part1.length <= 4) && part2.length == 2) {
+                    this.value = parseFloat(part1 + "." + part2);
+                }
             });
         });
     </script>
