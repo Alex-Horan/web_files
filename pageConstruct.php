@@ -18,7 +18,6 @@ class pageCreator {
         $_SESSION['descript'] = $desc;
         $_SESSION['price'] = $price;
         if(!mkdir("./item_pages/$title")) {
-            header("Location: ./index.php");
             die("failed to create folder - ./item_pages/$title/$title");
         }
         if (is_dir("./item_pages/$title/$title")) {
@@ -38,8 +37,14 @@ class pageCreator {
 $addPhp =" <?php 
     session_start();
     \$title = \$_SESSION['title'];
-    \$desc =  \$_SESSION['descript'];
-    \$price =  \$_SESSION['price'];
+    \$desc = \$_SESSION['descript'];
+    \$price = \$_SESSION['price'];
+    \$jop = fopen('../../items.json', 'a+');
+    \$jar = array('name' => \$title, 'description' => \$desc, 'price' => \$price);
+    \$jen = json_encode(\$jar);
+    \$jwr = fwrite(\$jop, \$jen);
+    echo \$jen;
+    session_write_close();
 ?>";
 
 $template = "
