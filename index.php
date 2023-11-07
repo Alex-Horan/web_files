@@ -2,6 +2,7 @@
 session_start();
     
 
+
 $title = $desc = $price = '';
 $titleErr = $descErr = $priceErr = '';
 
@@ -45,18 +46,31 @@ if (isset($_POST['submit'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Item</title>
+    <script src="./jquery-3.7.1.js"></script>
 </head>
 <body>
+    
+
 
     <form action"<?php htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
     Title: <input type="text" name="title" required> <span>* <?php echo $titleErr; ?></span> <br> <br>
     Description: <input type="text" name="desc" required> <span>* <?php echo $descErr; ?></span> <br> <br>
-    Price: <input type="number" name="price" step=".01" required><span>* <?php echo $priceErr; ?></span><br><br>  
+    Price: <input type="number" class="price" name="price" step=".01" required><span>* <?php echo $priceErr; ?></span><br><br>  
 
     
         <input type="submit" name="submit" value="submit">
-    </form>    
+    </form>
+    
+    <script>
+        const tempNum;
+        $(document).ready(function() {
+            $(".price").on("change", function() {
+                tempNum = (this.value).split
+                this.value = parseFloat(this.value).toFixed(2);
 
-
+            });
+        });
+    </script>
+    
 </body>
 </html> 

@@ -4,6 +4,18 @@
             $this->open("./shop_items.sqlite");
         }
     }
+class pageCreator {
+
+    public function create(string $title, string $desc, float $price, string $template) {
+        if(!mkdir("./$title")) {
+            die("Failed to make folder");
+        }
+            
+        $fw = fopen("./$title/$title","c");
+        fwrite($fw,"$template");
+    }
+}
+    
 $newPage = new pageCreator();
 $db = new MyDB();
 $rdb = $db->query("SELECT * FROM listings");
@@ -42,17 +54,7 @@ $template = "
 ";
 
 //testing
-    class pageCreator {
 
-        public function create(string $title, string $desc, float $price, string $template) {
-            if(!mkdir("./$title")) {
-                die("Failed to make folder");
-            }
-            
-            $fw = fopen("./$title/$title","c");
-            fwrite($fw,"$template");
-    }
-}
 
 
 
