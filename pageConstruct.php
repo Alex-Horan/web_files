@@ -4,12 +4,19 @@
             $this->open("./shop_items.sqlite");
         }
     }
+$newPage = new pageCreator();
 $db = new MyDB();
 $rdb = $db->query("SELECT * FROM listings");
     while ($results = $rdb->fetchArray(SQLITE3_ASSOC)) {
         $title = $results['name'];
         $desc = $results['descript'];
         $price = $results['price'];
+
+        foreach ($results as $key => $value) {
+            if ($key === 'name') {
+                echo $value;
+            }
+        }
     }
 
 $template = "
@@ -47,7 +54,7 @@ $template = "
     }
 }
 
-$newPage = new pageCreator();
-$newPage->create($title, $desc, $price, $template);
+
+
 
 ?>

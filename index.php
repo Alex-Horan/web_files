@@ -34,7 +34,7 @@ if (isset($_POST['submit'])) {
         $db = new SQLite3("./shop_items.sqlite");
         $db->exec("INSERT INTO listings(name, descript, price) VALUES ('$title', '$desc', '$price')");
         $db->close();
-        header('Location: ./testing.php');
+        header('Location: ./pageConstruct.php');
         exit();
     }
 }
